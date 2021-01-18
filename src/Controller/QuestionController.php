@@ -8,22 +8,26 @@ class QuestionController extends AbstractController
 {
     
     /**
-     * @Route("/")
+     * @Route("/",name="app_homepage")
      */
     public function homepage()
     {
-        return new Response('Karan');
+
+        $a=['Make sure your cat is sitting perfectly still',
+                  'Honestly, I like furry shoes better than my cat',
+                   'Maybe...try saying the spell backwards'];
+        return $this->render('questions/homepage.html.twig',['questions'=>$a]);
        
     }
     /**
-     * @Route("/questions/{slug}")
+     * @Route("/questions/{slug}",name="app_question_show")
      */
     public function show($slug)
     {
-        $answers=['Make sure your cat is sitting perfectly still',
+        $arr=['Make sure your cat is sitting perfectly still',
                   'Honestly, I like furry shoes better than my cat',
                    'Maybe...try saying the spell backwards'];
-        return $this->render('questions/show.html.twig',['questions'=>ucwords(str_replace('-',' ',$slug)),'answer'=>$answers]);
+        return $this->render('questions/show.html.twig',['question'=>ucwords(str_replace('-',' ',$slug)),'answers'=>$arr]);
        // return new Response(sprintf('Future page to show a question "%s"!',$slug));
     }
 }
